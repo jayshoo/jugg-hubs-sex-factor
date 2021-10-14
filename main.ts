@@ -2,6 +2,8 @@ let Decoder = new TextDecoder()
 let Encoder = new TextEncoder()
 
 async function sexFactor(name1: string, name2: string): Promise<Response> {
+  if (name1 == name2) return new Response(`Try lovin' someone else, ${name1}!`)
+  
   let data1 = Encoder.encode(name1)
   let data2 = Encoder.encode(name2)
   let hash1 = await crypto.subtle.digest('SHA-256', data1)
@@ -14,7 +16,7 @@ async function sexFactor(name1: string, name2: string): Promise<Response> {
   let x = xored >>> 1 // 0..127
   let n = x - 16 // -16..111
 
-  let answer = `${n}% sex factor!`
+  let answer = `${name1} and ${name2} have ${n}% sex factor!`
   
   return new Response(answer)
 }
