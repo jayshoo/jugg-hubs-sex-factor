@@ -21,5 +21,6 @@ async function sexFactor(name1: string, name2: string): Promise<Response> {
 
 addEventListener('fetch', event => {
   let [_, name1, name2] = new URL(event.request.url).pathname.split('/')
+  console.log('fetch', name1, name2)
   event.respondWith(sexFactor(name1, name2))
 })
